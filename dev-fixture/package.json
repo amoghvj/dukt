@@ -1,0 +1,27 @@
+{
+  "name": "dukt",
+  "version": "1.0.0",
+  "description": "Blockchain execution analysis and visualization backend",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test:api": "ts-node scripts/test-api.ts"
+  },
+  "keywords": ["blockchain", "evm", "execution", "analysis"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ethers": "^6.9.0",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2",
+    "@types/node": "^20.10.6",
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17"
+  }
+}

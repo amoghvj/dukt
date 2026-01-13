@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dukt - Test Frontend</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="app">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="logo">Dukt</h1>
+        <span class="badge">TEST UI</span>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-endpoint="/health">
+          <span class="nav-icon">●</span>
+          Health
+        </button>
+        <button class="nav-item" data-endpoint="/api/context">
+          <span class="nav-icon">◉</span>
+          Context
+        </button>
+        <button class="nav-item" data-endpoint="/architecture">
+          <span class="nav-icon">🏗️</span>
+          Architecture
+        </button>
+        <button class="nav-item" data-endpoint="/api/executions">
+          <span class="nav-icon">▤</span>
+          Executions
+        </button>
+        <button class="nav-item" data-endpoint="/api/hotspots">
+          <span class="nav-icon">▲</span>
+          Hotspots
+        </button>
+        <button class="nav-item" data-endpoint="/api/analytics">
+          <span class="nav-icon">◇</span>
+          Analytics
+        </button>
+      </nav>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Actions Section - Seed disabled, use send-demo-traces.js instead -->
+      <div class="nav-section">
+        <div class="nav-section-title">ACTIONS</div>
+        <!-- <button class="btn" id="seedMockBtn">Seed Mock Data</button> -->
+        <div class="nav-hint" style="color: var(--text-muted); font-size: 0.65rem; padding: 4px 16px;">Run: node
+          scripts/send-demo-traces.js</div>
+      </div>
+
+      <div class="sidebar-footer">
+        <p class="footer-text">Testing only</p>
+        <p class="footer-text">For Thinkroot integration</p>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <header class="header">
+        <div class="header-left">
+          <h2 class="page-title" id="pageTitle">Health Check</h2>
+          <span class="endpoint-badge" id="endpointBadge">GET /health</span>
+        </div>
+        <div class="header-right">
+          <span class="status-indicator" id="statusIndicator">Ready</span>
+        </div>
+      </header>
+
+      <div class="content">
+        <!-- Response Info -->
+        <div class="response-info" id="responseInfo">
+          <div class="info-item">
+            <span class="info-label">Status</span>
+            <span class="info-value" id="responseStatus">-</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Time</span>
+            <span class="info-value" id="responseTime">-</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Size</span>
+            <span class="info-value" id="responseSize">-</span>
+          </div>
+        </div>
+
+        <!-- JSON Response -->
+        <div class="response-container">
+          <div class="response-header">
+            <span>Response</span>
+            <button class="copy-btn" id="copyBtn" title="Copy to clipboard">Copy</button>
+          </div>
+          <pre class="response-body" id="responseBody">Click an endpoint to fetch data...</pre>
+        </div>
+
+        <!-- Execution Detail (hidden by default) -->
+        <div class="detail-panel" id="detailPanel" style="display: none;">
+          <h3>Execution Flow</h3>
+          <pre class="response-body" id="detailBody"></pre>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
