@@ -571,71 +571,82 @@ function hideExecToggle() {
 
 /**
  * Render VaultFi Architecture Diagram
+ * Shows static image from backend, with HTML fallback
  */
 function renderArchitectureView() {
     const html = `
-    <div style="padding: 30px 20px; font-family: var(--font-mono); overflow-y: auto;">
+    <div style="padding: 20px; font-family: var(--font-mono); overflow-y: auto; text-align: center;">
         
-        <h3 style="text-align: center; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.1em;">VaultFi Protocol</h3>
-        <p style="text-align: center; color: var(--text-secondary); font-size: 0.75rem; margin-bottom: 24px;">DeFi Yield Vault Architecture</p>
+        <h3 style="color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.1em;">VaultFi Protocol</h3>
+        <p style="color: var(--text-secondary); font-size: 0.75rem; margin-bottom: 16px;">DeFi Yield Vault Architecture</p>
 
-        <!-- User Layer -->
-        <div style="display: flex; justify-content: center; margin-bottom: 8px;">
-            <div style="padding: 10px 20px; border: 2px solid #6366f1; border-radius: 8px; background: rgba(99, 102, 241, 0.1); color: var(--text-primary); font-weight: 600; font-size: 0.85rem;">
-                👤 User
-            </div>
-        </div>
-        
-        <div style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">↓ deposit / withdraw</div>
-
-        <!-- VaultCore -->
-        <div style="display: flex; justify-content: center; margin-bottom: 8px;">
-            <div style="padding: 12px 24px; border: 2px solid #22c55e; border-radius: 8px; background: rgba(34, 197, 94, 0.1); color: var(--text-primary); font-weight: 600; font-size: 0.9rem; min-width: 140px; text-align: center;">
-                🏦 VaultCore
-                <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400; margin-top: 4px;">deposit() • withdraw() • rebalance()</div>
-            </div>
+        <!-- Static Image (from Eraser) -->
+        <div id="arch-image-container">
+            <img 
+                src="/images/vaultfi-architecture.png" 
+                alt="VaultFi Architecture Diagram"
+                style="max-width: 100%; max-height: 600px; border-radius: 8px; border: 1px solid var(--border-color);"
+                onerror="document.getElementById('arch-image-container').style.display='none'; document.getElementById('arch-fallback').style.display='block';"
+            />
         </div>
 
-        <div style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">↓ allocate / harvest</div>
-
-        <!-- StrategyManager -->
-        <div style="display: flex; justify-content: center; margin-bottom: 8px;">
-            <div style="padding: 12px 24px; border: 2px solid #f59e0b; border-radius: 8px; background: rgba(245, 158, 11, 0.1); color: var(--text-primary); font-weight: 600; font-size: 0.9rem; min-width: 160px; text-align: center;">
-                📊 StrategyManager
-                <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400; margin-top: 4px;">allocateFunds() • harvestYield()</div>
+        <!-- HTML Fallback (if image not found) -->
+        <div id="arch-fallback" style="display: none; text-align: left; padding: 20px;">
+            <!-- User Layer -->
+            <div style="display: flex; justify-content: center; margin-bottom: 8px;">
+                <div style="padding: 10px 20px; border: 2px solid #6366f1; border-radius: 8px; background: rgba(99, 102, 241, 0.1); color: var(--text-primary); font-weight: 600; font-size: 0.85rem;">
+                    👤 User
+                </div>
             </div>
-        </div>
+            
+            <div style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">↓ deposit / withdraw</div>
 
-        <div style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">↓ deploy / claim</div>
-
-        <!-- YieldStrategy -->
-        <div style="display: flex; justify-content: center; margin-bottom: 8px;">
-            <div style="padding: 12px 24px; border: 2px solid #8b5cf6; border-radius: 8px; background: rgba(139, 92, 246, 0.1); color: var(--text-primary); font-weight: 600; font-size: 0.9rem; min-width: 140px; text-align: center;">
-                🌱 YieldStrategy
-                <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400; margin-top: 4px;">deployCapital() • claimRewards()</div>
+            <!-- VaultCore -->
+            <div style="display: flex; justify-content: center; margin-bottom: 8px;">
+                <div style="padding: 12px 24px; border: 2px solid #22c55e; border-radius: 8px; background: rgba(34, 197, 94, 0.1); color: var(--text-primary); font-weight: 600; font-size: 0.9rem; min-width: 140px; text-align: center;">
+                    🏦 VaultCore
+                    <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400; margin-top: 4px;">deposit() • withdraw() • rebalance()</div>
+                </div>
             </div>
-        </div>
 
-        <div style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">↓ supply / redeem</div>
+            <div style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">↓ allocate / harvest</div>
 
-        <!-- External Protocols Row -->
-        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 16px;">
-            <div style="padding: 10px 16px; border: 1px solid var(--border-light); border-radius: 8px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 0.8rem; text-align: center;">
-                🏛️ LendingPool
-                <div style="font-size: 0.6rem; color: var(--text-muted); margin-top: 2px;">External</div>
+            <!-- StrategyManager -->
+            <div style="display: flex; justify-content: center; margin-bottom: 8px;">
+                <div style="padding: 12px 24px; border: 2px solid #f59e0b; border-radius: 8px; background: rgba(245, 158, 11, 0.1); color: var(--text-primary); font-weight: 600; font-size: 0.9rem; min-width: 160px; text-align: center;">
+                    📊 StrategyManager
+                    <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400; margin-top: 4px;">allocateFunds() • harvestYield()</div>
+                </div>
             </div>
-            <div style="padding: 10px 16px; border: 1px solid var(--border-light); border-radius: 8px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 0.8rem; text-align: center;">
-                📈 PriceOracle
-                <div style="font-size: 0.6rem; color: var(--text-muted); margin-top: 2px;">getPrice()</div>
+
+            <div style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">↓ deploy / claim</div>
+
+            <!-- YieldStrategy -->
+            <div style="display: flex; justify-content: center; margin-bottom: 8px;">
+                <div style="padding: 12px 24px; border: 2px solid #8b5cf6; border-radius: 8px; background: rgba(139, 92, 246, 0.1); color: var(--text-primary); font-weight: 600; font-size: 0.9rem; min-width: 140px; text-align: center;">
+                    🌱 YieldStrategy
+                    <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400; margin-top: 4px;">deployCapital() • claimRewards()</div>
+                </div>
             </div>
-            <div style="padding: 10px 16px; border: 1px solid var(--border-light); border-radius: 8px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 0.8rem; text-align: center;">
-                💰 USDC
-                <div style="font-size: 0.6rem; color: var(--text-muted); margin-top: 2px;">ERC20</div>
+
+            <div style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">↓ supply / redeem</div>
+
+            <!-- External Protocols Row -->
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 16px;">
+                <div style="padding: 10px 16px; border: 1px solid var(--border-light); border-radius: 8px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 0.8rem; text-align: center;">
+                    🏛️ LendingPool
+                </div>
+                <div style="padding: 10px 16px; border: 1px solid var(--border-light); border-radius: 8px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 0.8rem; text-align: center;">
+                    📈 PriceOracle
+                </div>
+                <div style="padding: 10px 16px; border: 1px solid var(--border-light); border-radius: 8px; background: var(--bg-tertiary); color: var(--text-secondary); font-size: 0.8rem; text-align: center;">
+                    💰 USDC
+                </div>
             </div>
         </div>
 
         <!-- Legend -->
-        <div style="margin-top: 24px; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-secondary);">
+        <div style="margin-top: 16px; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-secondary); text-align: left;">
             <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase;">Transaction Flows</div>
             <div style="display: flex; flex-wrap: wrap; gap: 12px; font-size: 0.7rem;">
                 <span style="color: #22c55e;">● Deposit</span>
@@ -649,5 +660,5 @@ function renderArchitectureView() {
     `;
 
     responseBody.innerHTML = html;
-    hideExecToggle(); // Hide the toggle container for this view
+    hideExecToggle();
 }
