@@ -1,0 +1,13 @@
+{
+  "name": "hardhat-dukt-test-fixture",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "npx hardhat run scripts/test-transactions.js"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.0.0",
+    "ethers": "^6.0.0",
+    "hardhat": "^2.22.0"
+  }
+}
